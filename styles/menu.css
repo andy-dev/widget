@@ -1,0 +1,104 @@
+/*.bg_header_img{
+  background: url('./images/pbs_menu_icons/Announcement.png')
+}*/
+
+/*@font-face{
+  font-family : 'Lora';
+
+  /*fonts loaded via url loader*/
+/*  src: url('../fonts/Lora-Regular.ttf');
+  src: url('../fonts/Lora-Regular.ttf');
+  src: url('../fonts/Lora-Regular.ttf');*/
+/*}*/
+
+/*body{
+  font-family: 'Lora, Helvica, Arial';
+}*/
+
+#pbs-pill-container{
+    width: 100% !important;
+}
+
+#pbs-pill-container #pbs-pill-top-level-ul{
+    list-style: none !important;
+    display: flex !important;
+    margin:0 !important;
+    padding:0 !important;
+}
+
+#pbs-pill-container .pbs-pill-top-level-li {
+    display: flex !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+    text-align: center !important; 
+    height: 50px !important;
+    flex: 1 !important;
+    overflow: hidden !important;
+    background: #254441 !important;
+}
+
+#pbs-pill-container .pbs-pill-top-level-links{
+    text-decoration: none !important;
+    color:white !important;
+    font-size: 16px !important;
+}
+
+#pbs-pill-container .pbs-pill-top-level-li:hover{   
+    background-color: #212121 !important;
+}
+
+#pbs-pill-container .pbs-pill-dropdown-nav-column{
+    float:left !important;
+    width: 20% !important;
+}
+
+#pbs-pill-container .pbs-pill-second-level-li{
+    list-style: none !important;
+    text-align: left !important;
+}
+
+#pbs-pill-container nav ul#pbs-pill-megamenu-ul {
+  position: absolute !important;
+  display: flex !important;
+  flex-wrap: wrap !important; 
+  top: 49px !important;
+  left:0 !important;
+  width:100vw !important;
+  padding: 40px 40px 0 40px !important;
+  background: #fff !important;
+  text-align: left !important;
+  background: white !important;
+  visibility: hidden !important;
+}
+
+#pbs-pill-container nav ul li:hover ul#pbs-pill-megamenu-ul {
+  visibility: visible !important;
+}
+
+#pbs-pill-container nav ul#pbs-pill-megamenu-ul ul {
+  width: 25% !important;
+  margin-bottom: 40px !important;
+  color: #254441 !important;
+}
+
+#pbs-pill-container nav ul#pbs-pill-megamenu-ul h4 {
+  margin-bottom: 15px !important;
+}
+
+#pbs-pill-container nav ul#pbs-pill-megamenu-ul ul li {
+  display: block !important;
+}
+
+#pbs-pill-container nav ul#pbs-pill-megamenu-ul ul li a {
+  text-decoration: none !important;
+  margin-top: 10px !important;
+  color: !important;
+}
+
+#pbs-pill-container nav ul#pbs-pill-megamenu-ul ul li a:hover {
+  color: red !important;
+}
+
+/*------------------------------------*\
+  #TODO pill Nav Top Responsive Media Queries
+\*------------------------------------*/
