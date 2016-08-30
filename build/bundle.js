@@ -44,11 +44,9 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(jQuery) {// require("./style.css");
-	__webpack_require__(2);
+	/* WEBPACK VAR INJECTION */(function(jQuery) {__webpack_require__(2);
 	__webpack_require__(15);
 	__webpack_require__(16);
-
 
 	var getPartials = __webpack_require__(37)
 	var setOpenClosePillHandlers = __webpack_require__(46)
@@ -97,7 +95,6 @@
 		getPartials();
 		renderPbsPill();
 		// getPillData();
-		// renderBrandonPill();
 		
 	})();
 
@@ -118,16 +115,7 @@
 
 
 
-	// Stork.navBarResponsive = function navBarResponsive(){
-	// 		Stork.$(".icon-hamburguer").click(function(){
-	// 		var x = document.getElementById("myTopnav");
-	// 		    if (x.className === "topnav") {
-	// 		        x.className += " responsive";
-	// 		    } else {
-	// 		        x.className = "topnav";
-	// 		    }
-	// 		})	 
-	// 	}
+
 
 
 	//get json response object
@@ -167,69 +155,7 @@
 
 
 
-	// var PbsPillWidget = (function(){
 
-	// 	function getPartials(){
-	// 		var Handlebars = require('handlebars-template-loader/runtime');
-	// 		var partial = require('./templates/_topMenuPartial.hbs');
-	// 		Handlebars.registerPartial('my_partial', partial);
-	// 	}
-
-	// 	function getPillJsonData(){
-
-	// 		$.ajax({
-	// 			url: "http://dev.mypbs.org/z/components/webservices/Pbsextensionservice.asmx/GetMenuData",
-	// 			method: 'GET',
-	// 			contentType: 'application/json; charset=utf-8',
-	// 			dataType: 'json'
-	// 		})
-	// 		.done(function(response){
-	// 			console.log("success we got a response")
-	// 			console.log(reponse);
-	// 			var response = response;
-	// 		})
-	// 		.error(function(err){
-	// 			console.log("ERROR!")
-	// 			console.log(err);
-	// 		})
-
-	// 		return response;
-	// 	}
-
-
-	// 	function handleB(){
-	// 		// Pass mockServerResponse to compiled template  
-	// 		var template = require('./templates/pill.hbs');
-	// 		var menuServerResponseMock = require('./response.json');
-
-	// 		var menuServer = getPillJsonData();
-	// 		var el_html = template(menuServerResponseMock);
-			
-	// 		// Append to publisher avoid using jquery at all costs
-	// 		var div = document.createElement('div');
-	// 		div.innerHTML = el_html;
-	// 		var appendTo = document.getElementById('pbs-pill-widget'); 
-	// 		appendTo.parentNode.insertBefore(div, appendTo);
-	// 	}
-
-	// 	function getImages(){
-	// 		var img = document.createElement('img');
-	// 		img.style.height = "25%";
-	// 		img.style.width = "25%";
-	// 		img.src = require('./images/pbs_menu_icons/DashboardWatch.png');
-	// 		document.getElementById('img_container').appendChild(img);
-	// 	}
-
-
-
-
-	// 	getPartials();
-	// 	handleB();
-	// 	getImages();
-		
-
-	// 	return {handleB: handleB};
-	// })();
 		
 
 		
@@ -9447,8 +9373,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../node_modules/css-loader/index.js!./menuV2.css", function() {
-				var newContent = require("!!./../node_modules/css-loader/index.js!./menuV2.css");
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./myPBS-pill-menu.css", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./myPBS-pill-menu.css");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -13870,6 +13796,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(jQuery) {module.exports = function(){
+
 	  var myPBS_PILL_MENU = {};
 	  myPBS_PILL_MENU.$ = myPBS_PILL_MENU.jQuery = jQuery.noConflict(true);
 	  
@@ -13938,8 +13865,8 @@
 	      myPBS_PILL_MENU.$('.myPBS-pillMenu-wsmenu-click').parent().not(myPBS_PILL_MENU.$(this).parent()).removeClass('open');
 	      myPBS_PILL_MENU.$(this).parent().toggleClass('open');
 	    });
-
 	  });
+	  
 	}
 
 

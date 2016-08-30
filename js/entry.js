@@ -1,8 +1,6 @@
-// require("./style.css");
-require("../styles/menuV2.css");
+require("../styles/myPBS-pill-menu.css");
 require("./bootstrap.js");
 require("./handleBarsHelpers.js");
-
 
 var getPartials = require("./handleBarsPartials")
 var setOpenClosePillHandlers = require("./pill.js")
@@ -51,7 +49,6 @@ var PbsPillWidget = (function(){
 	getPartials();
 	renderPbsPill();
 	// getPillData();
-	// renderBrandonPill();
 	
 })();
 
@@ -72,16 +69,7 @@ var PbsPillWidget = (function(){
 
 
 
-// Stork.navBarResponsive = function navBarResponsive(){
-// 		Stork.$(".icon-hamburguer").click(function(){
-// 		var x = document.getElementById("myTopnav");
-// 		    if (x.className === "topnav") {
-// 		        x.className += " responsive";
-// 		    } else {
-// 		        x.className = "topnav";
-// 		    }
-// 		})	 
-// 	}
+
 
 
 //get json response object
@@ -121,69 +109,7 @@ var PbsPillWidget = (function(){
 
 
 
-// var PbsPillWidget = (function(){
 
-// 	function getPartials(){
-// 		var Handlebars = require('handlebars-template-loader/runtime');
-// 		var partial = require('./templates/_topMenuPartial.hbs');
-// 		Handlebars.registerPartial('my_partial', partial);
-// 	}
-
-// 	function getPillJsonData(){
-
-// 		$.ajax({
-// 			url: "http://dev.mypbs.org/z/components/webservices/Pbsextensionservice.asmx/GetMenuData",
-// 			method: 'GET',
-// 			contentType: 'application/json; charset=utf-8',
-// 			dataType: 'json'
-// 		})
-// 		.done(function(response){
-// 			console.log("success we got a response")
-// 			console.log(reponse);
-// 			var response = response;
-// 		})
-// 		.error(function(err){
-// 			console.log("ERROR!")
-// 			console.log(err);
-// 		})
-
-// 		return response;
-// 	}
-
-
-// 	function handleB(){
-// 		// Pass mockServerResponse to compiled template  
-// 		var template = require('./templates/pill.hbs');
-// 		var menuServerResponseMock = require('./response.json');
-
-// 		var menuServer = getPillJsonData();
-// 		var el_html = template(menuServerResponseMock);
-		
-// 		// Append to publisher avoid using jquery at all costs
-// 		var div = document.createElement('div');
-// 		div.innerHTML = el_html;
-// 		var appendTo = document.getElementById('pbs-pill-widget'); 
-// 		appendTo.parentNode.insertBefore(div, appendTo);
-// 	}
-
-// 	function getImages(){
-// 		var img = document.createElement('img');
-// 		img.style.height = "25%";
-// 		img.style.width = "25%";
-// 		img.src = require('./images/pbs_menu_icons/DashboardWatch.png');
-// 		document.getElementById('img_container').appendChild(img);
-// 	}
-
-
-
-
-// 	getPartials();
-// 	handleB();
-// 	getImages();
-	
-
-// 	return {handleB: handleB};
-// })();
 	
 
 	

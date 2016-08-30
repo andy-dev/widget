@@ -1,4 +1,5 @@
 module.exports = function(){
+
   var myPBS_PILL_MENU = {};
   myPBS_PILL_MENU.$ = myPBS_PILL_MENU.jQuery = jQuery.noConflict(true);
   
@@ -67,8 +68,8 @@ module.exports = function(){
       myPBS_PILL_MENU.$('.myPBS-pillMenu-wsmenu-click').parent().not(myPBS_PILL_MENU.$(this).parent()).removeClass('open');
       myPBS_PILL_MENU.$(this).parent().toggleClass('open');
     });
-
   });
+  
 }
 
 
