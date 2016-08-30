@@ -8,16 +8,28 @@ Handlebars.registerHelper('listItem', function(from, to, context,options){
 	return item;
 })
 
-Handlebars.registerHelper('generatePages', function(rightMenu){
-	var pages = [],    
-	    pageCount = rightMenu.length;
+Handlebars.registerHelper('createLeftLiColumn', function(rightMenuSub){
+	var leftColumnLength = Math.ceil(rightMenuSub.length/2);
+	var results = [];
 
-	for(var i=1; i<= pageCount; i++){
-		pages.push({
-			number: i
-		})
-		return pages;
-	}
+	for(var i=0; i < leftColumnLength; i++){
+  	results.push({
+    	leftLiItem : rightMenuSub[i].Text
+    })
+  } 
+  return results; 
+})
+
+Handlebars.registerHelper('createRightLiColumn', function(rightMenuSub){	
+	var rightColumnLength = Math.floor(rightMenuSub.length/2);
+	var results = [];
+
+	for(var i=0; i < rightColumnLength; i++){
+  	results.push({
+    	rightLiItem : rightMenuSub[i].Text
+    })
+  } 
+  return results; 
 })
 
 Handlebars.registerHelper('getHtmlElements', function(contentsArray){
@@ -38,11 +50,6 @@ Handlebars.registerHelper('getHtmlElements', function(contentsArray){
 	return htmlContents;
 })
 
-
-Handlebars.registerHelper("incIndex", function(value, options){
-	return parseInt(value) + 1;
-})
-
 Handlebars.registerHelper("math", function(lvalue, operator, rvalue, options){
 	lvalue = parseFloat(lvalue);
 	rvalue = parseFloat(rvalue);
@@ -54,4 +61,8 @@ Handlebars.registerHelper("math", function(lvalue, operator, rvalue, options){
 		"/": lvalue / rvalue,
 		"%": lvalue % rvalue
 	}[operator];
+})
+
+Handlebars.registerHelper("incIndex", function(value, options){
+	return parseInt(value) + 1;
 })

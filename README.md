@@ -27,15 +27,15 @@ To have a testing and development enviroment we will use to domains (mac instruc
 
 For the following using vim, nano or a text editor of your choice
 
-1. Find your host settings in /etc/hosts
-2. Add the following to your settings
+1 Find your host settings in /etc/hosts
+2 Add the following to your settings
 
 ```
    127.0.0.1 publisher.dev
    127.0.0.1 widget.dev
 ```
 
-3. Find etc/apache2/httpd.conf and add the following using vim nano or a text editor:
+3  Find etc/apache2/httpd.conf and add the following using vim nano or a text editor:
  
 ```
 <VirtualHost *:80>
@@ -48,7 +48,7 @@ For the following using vim, nano or a text editor of your choice
 </VirtualHost>
 ```
 
-4. In some cases you might have to do the following in etc/apache2/httpd.conf
+4  In some cases you might have to do the following in etc/apache2/httpd.conf
 
 ```
 <Directory "/Users/username/project/">
@@ -58,26 +58,30 @@ Require all granted
 </Directory>
 ```
 
-5. Navigate to /Library/WebServer/Documents
-
+5  Navigate to /Library/WebServer/Documents
+```
 ` $sudo apachectl start`
-
-5. You can now navigate to publisher.dev or widget.dev in your browser 
+```
+6  You can now navigate to publisher.dev or widget.dev in your browser 
 
 
 ### Up and Running
 To run this locally you will need node. 
 
 Run:
+```
 ` $ npm install`
+```
 
 ### webpack.config
 Webpack is a module loader that will help us build and minify our depedencies into one file, bundle.js
 In this app, we set which loaders are needed for our application.
 If you are not using the webpack server, to bundle the js, run the following command:
 Run:
+```
 ` $ webpack`
 ` $ webpack -w`
+```
 This command should create our bundle.js file inside the build folder. Using the -w flag will watch for your files on save and re-build.
 
 ### entry.js
@@ -92,7 +96,15 @@ Same as images, we will use url loader for loading our fonts. Fonts live in the 
 ### Minifcation and Production build
 Once ready to distribute it, will do all transpiling and combining, optimize-minimize does uglify
 Run:
-`$ webpack -p --optimize-minimize` 
+```
+`$ webpack -p --optimize-minimize`
+```
+
+### Handlebars Templating Helpers
+Helpers are use to create more semantic markup. The file handleBarsHelpers.js has all functions created to parse data received from the webServer. 
+
+### Handlebars Templating Partials
+To avoid having big hard to read files, we use partials to break up our templates. The templates are organize with the main template inside templates folder and then two additional folders, one representing the top level items (programming, watch videos, feeds, engage + promote) and a subMenu folder that represents the dropdown menus. Handlebars partials are registered inside handleBarsPartials.js. 
 
 
 ### Congratulations

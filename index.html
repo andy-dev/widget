@@ -7,66 +7,7 @@
 </head>
 <body>
 
-<p>hello</p>
-
-<script type="text/javascript">
-
-
-function getHTML(contentsArray){
-  var parser = new DOMParser;
-  var parsedHtmlObject = {
-    contents:[]
-  };
-
-  for (var i = 0; i < contentsArray.length; i++) {
-    
-    var xmlString    = contentsArray[i].Html;
-    var doc          = parser.parseFromString(xmlString, "text/xml");
-     
-    parsedHtmlObject.contents.push({
-      "link"        : doc.firstChild.childNodes[0].getAttribute("href"),
-      "image"       : doc.firstChild.childNodes[0].getElementsByTagName("img")[0].getAttribute("src"),
-      "header"      : doc.firstChild.childNodes[0].getElementsByTagName("h4")[0].innerHTML,
-      "description" : doc.firstChild.childNodes[0].getElementsByTagName("p")[0].innerHTML
-    })
-  }
-
-  console.log(parsedHtmlObject)
-  return parsedHtmlObject;
-}
-
-var contentsArray = [
-                {
-                  "Html": "<li><a href=\"http:\/\/mypbs.org\/brand_health\/\"><img src=\"\/uploadedImages\/BrandHealth(1).png\" \/><h4>Brand Health<\/h4><p>Find out consumer perceptions of PBS, brand positioning strengths \/ weaknesses, marketing efforts, and more.<\/p><\/a><\/li>"
-                },
-                {
-                  "Html": "<li><a href=\"http:\/\/mypbs.org\/2015_Trust\/\"><img src=\"\/uploadedImages\/e\/Menu_Pop-Outs\/TrustBrochure.png\" \/><h4>2015 Trust Study Brochure<\/h4><p>PBS is the most-trusted source for news and public affairs programs. Get more facts from this study.<\/p><\/a><\/li>"
-                }
-              ];
-getHTML(contentsArray)
-
-
-
-
-function getMenu2(){
-
-	$.ajax({
-    method: 'GET',
-    contentType: 'application/json; charset=utf-8',
-    dataType: 'json',
-    url: 'http://dev.mypbs.org/z/components/webservices/PBSExtensionservice.asmx/GetMenuData'
-  })
-  .done(function (response) {
-    console.log(response);
-  })
-  .error(function (error) {
-    console.log(error);
-  });	
-}
-
-
-
-</script>
+	<p>Widget Page</p>
 
 </body>
 </html>

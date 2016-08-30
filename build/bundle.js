@@ -12216,16 +12216,28 @@
 		return item;
 	})
 
-	Handlebars.registerHelper('generatePages', function(rightMenu){
-		var pages = [],    
-		    pageCount = rightMenu.length;
+	Handlebars.registerHelper('createLeftLiColumn', function(rightMenuSub){
+		var leftColumnLength = Math.ceil(rightMenuSub.length/2);
+		var results = [];
 
-		for(var i=1; i<= pageCount; i++){
-			pages.push({
-				number: i
-			})
-			return pages;
-		}
+		for(var i=0; i < leftColumnLength; i++){
+	  	results.push({
+	    	leftLiItem : rightMenuSub[i].Text
+	    })
+	  } 
+	  return results; 
+	})
+
+	Handlebars.registerHelper('createRightLiColumn', function(rightMenuSub){	
+		var rightColumnLength = Math.floor(rightMenuSub.length/2);
+		var results = [];
+
+		for(var i=0; i < rightColumnLength; i++){
+	  	results.push({
+	    	rightLiItem : rightMenuSub[i].Text
+	    })
+	  } 
+	  return results; 
 	})
 
 	Handlebars.registerHelper('getHtmlElements', function(contentsArray){
@@ -12246,11 +12258,6 @@
 		return htmlContents;
 	})
 
-
-	Handlebars.registerHelper("incIndex", function(value, options){
-		return parseInt(value) + 1;
-	})
-
 	Handlebars.registerHelper("math", function(lvalue, operator, rvalue, options){
 		lvalue = parseFloat(lvalue);
 		rvalue = parseFloat(rvalue);
@@ -12262,6 +12269,10 @@
 			"/": lvalue / rvalue,
 			"%": lvalue % rvalue
 		}[operator];
+	})
+
+	Handlebars.registerHelper("incIndex", function(value, options){
+		return parseInt(value) + 1;
 	})
 
 /***/ },
@@ -13601,7 +13612,7 @@
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1, alias1=depth0 != null ? depth0 : {};
 
-	  return "<li class=\"myPBS-pillMenu-menuSection\">\n	<a class=\"myPBS-pillMenu-wsmenu-click\" href=\"#\"><i class=\"menu-icon myPBS-pillMenu-icon-tv\"></i>&nbsp;&nbsp;Watch Videos <span class=\"myPBS-pillMenu-arrow\"></span></a>\n\n\n	<div class=\"myPBS-pillMenu-megamenu clearfix\">    \n		<ul class=\"nav nav-tabs tabs-left col-lg-3\">\n		   \n"
+	  return "<li class=\"myPBS-pillMenu-menuSection\">\n	<a class=\"myPBS-pillMenu-wsmenu-click\" href=\"#\"><i class=\"menu-icon myPBS-pillMenu-icon-tv\"></i>&nbsp;&nbsp;Watch Videos <span class=\"myPBS-pillMenu-arrow\"></span></a>\n\n	<div class=\"myPBS-pillMenu-megamenu clearfix\">    \n		<ul class=\"nav nav-tabs tabs-left col-lg-3\">\n		   \n"
 	    + ((stack1 = helpers.each.call(alias1,((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.WatchVideos : depth0)) != null ? stack1.MenuItem : stack1)) != null ? stack1.SubMenu : stack1)) != null ? stack1.LeftMenu : stack1),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
 	    + "	\n			<li><a href=\"#\">Browse All By List</a></li>\n		</ul>\n		\n		<div class=\"tab-content col-lg-8\">\n"
 	    + ((stack1 = helpers.each.call(alias1,((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.WatchVideos : depth0)) != null ? stack1.MenuItem : stack1)) != null ? stack1.SubMenu : stack1)) != null ? stack1.RightMenu : stack1),{"name":"each","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
@@ -13813,7 +13824,7 @@
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1, alias1=depth0 != null ? depth0 : {};
 
-	  return "<li class=\"myPBS-pillMenu-menuSection\">\n	<a class=\"myPBS-pillMenu-wsmenu-click\" href=\"#\"><i class=\"menu-icon myPBS-pillMenu-icon-gear\"></i>&nbsp;&nbsp;Station Management <span class=\"myPBS-pillMenu-arrow\"></span></a>\n	\n\n	<div class=\"myPBS-pillMenu-megamenu clearfix\">\n	  <ul class=\"nav nav-tabs tabs-left col-lg-3\">\n		   \n"
+	  return "<li class=\"myPBS-pillMenu-menuSection\">\n	<a class=\"myPBS-pillMenu-wsmenu-click\" href=\"#\"><i class=\"menu-icon myPBS-pillMenu-icon-gear\"></i>&nbsp;&nbsp;Station Management <span class=\"myPBS-pillMenu-arrow\"></span></a>\n	\n	<div class=\"myPBS-pillMenu-megamenu clearfix\">\n	  <ul class=\"nav nav-tabs tabs-left col-lg-3\">\n		   \n"
 	    + ((stack1 = helpers.each.call(alias1,((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.StationManagement : depth0)) != null ? stack1.MenuItem : stack1)) != null ? stack1.SubMenu : stack1)) != null ? stack1.LeftMenu : stack1),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
 	    + "	\n			<li><a href=\"#\">Browse All By List</a></li>\n		</ul>\n		\n		<div class=\"tab-content col-lg-8\">\n"
 	    + ((stack1 = helpers.each.call(alias1,((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.StationManagement : depth0)) != null ? stack1.MenuItem : stack1)) != null ? stack1.SubMenu : stack1)) != null ? stack1.RightMenu : stack1),{"name":"each","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
@@ -13866,7 +13877,7 @@
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1, alias1=depth0 != null ? depth0 : {};
 
-	  return "<li class=\"myPBS-pillMenu-menuSection\">\n	<a class=\"myPBS-pillMenu-wsmenu-click\" href=\"#\"><i class=\"menu-icon myPBS-pillMenu-icon-feeds\"></i>&nbsp;&nbsp;Feeds <span class=\"myPBS-pillMenu-arrow\"></span></a>\n	<div class=\"myPBS-pillMenu-megamenu clearfix\">  \n		<ul class=\"nav nav-tabs tabs-left col-lg-3\">\n		   \n"
+	  return "<li class=\"myPBS-pillMenu-menuSection\">\n	<a class=\"myPBS-pillMenu-wsmenu-click\" href=\"#\"><i class=\"menu-icon myPBS-pillMenu-icon-feeds\"></i>&nbsp;&nbsp;Feeds <span class=\"myPBS-pillMenu-arrow\"></span></a>\n	\n	<div class=\"myPBS-pillMenu-megamenu clearfix\">  \n		<ul class=\"nav nav-tabs tabs-left col-lg-3\">\n		   \n"
 	    + ((stack1 = helpers.each.call(alias1,((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.Feeds : depth0)) != null ? stack1.MenuItem : stack1)) != null ? stack1.SubMenu : stack1)) != null ? stack1.LeftMenu : stack1),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
 	    + "	\n			<li><a href=\"#\">Browse All By List</a></li>\n		</ul>\n		\n		<div class=\"tab-content col-lg-8\">\n"
 	    + ((stack1 = helpers.each.call(alias1,((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.Feeds : depth0)) != null ? stack1.MenuItem : stack1)) != null ? stack1.SubMenu : stack1)) != null ? stack1.RightMenu : stack1),{"name":"each","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
@@ -13893,19 +13904,25 @@
 	},"3":function(container,depth0,helpers,partials,data) {
 	    var helper;
 
-	  return "				<li><a href='#'>"
-	    + container.escapeExpression(((helper = (helper = helpers.Text || (depth0 != null ? depth0.Text : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"Text","hash":{},"data":data}) : helper)))
+	  return "					<li><a href='#'>"
+	    + container.escapeExpression(((helper = (helper = helpers.leftLiItem || (depth0 != null ? depth0.leftLiItem : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"leftLiItem","hash":{},"data":data}) : helper)))
+	    + "</a></li>\n";
+	},"5":function(container,depth0,helpers,partials,data) {
+	    var helper;
+
+	  return "					<li><a href='#'>"
+	    + container.escapeExpression(((helper = (helper = helpers.rightLiItem || (depth0 != null ? depth0.rightLiItem : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"rightLiItem","hash":{},"data":data}) : helper)))
 	    + "</a></li>\n";
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing;
 
 	  return "<div class=\"row\">\n"
 	    + ((stack1 = helpers.each.call(alias1,(helpers.getHtmlElements || (depth0 && depth0.getHtmlElements) || alias2).call(alias1,(depth0 != null ? depth0.Contents : depth0),{"name":"getHtmlElements","hash":{},"data":data}),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-	    + "</div>\n<div class=\"row\">\n	<div class=\"col-lg-12 col-md-12 col-xs-12\">\n		<h3>Watch Videos</h3>\n		<ul class=\"col-lg-4 col-md-4 col-xs-12 link-list\">					\n"
-	    + ((stack1 = (helpers.listItem || (depth0 && depth0.listItem) || alias2).call(alias1,0,4,(depth0 != null ? depth0.RightMenuSub : depth0),{"name":"listItem","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-	    + "		</ul>\n		<ul class=\"col-lg-4 col-md-4 col-xs-12 link-list\">\n"
-	    + ((stack1 = (helpers.listItem || (depth0 && depth0.listItem) || alias2).call(alias1,4,12,(depth0 != null ? depth0.RightMenuSub : depth0),{"name":"listItem","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-	    + "		</ul>\n	</div>\n</div>";
+	    + "</div>\n<div class=\"row\">\n	<div class=\"col-lg-12 col-md-12 col-xs-12\">\n		<h3>Watch Videos</h3>\n\n			<ul class=\"col-lg-4 col-md-4 col-xs-12 link-list\">											\n"
+	    + ((stack1 = helpers.each.call(alias1,(helpers.createLeftLiColumn || (depth0 && depth0.createLeftLiColumn) || alias2).call(alias1,(depth0 != null ? depth0.RightMenuSub : depth0),{"name":"createLeftLiColumn","hash":{},"data":data}),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+	    + "			</ul>\n			<ul class=\"col-lg-4 col-md-4 col-xs-12 link-list\">	\n"
+	    + ((stack1 = helpers.each.call(alias1,(helpers.createRightLiColumn || (depth0 && depth0.createRightLiColumn) || alias2).call(alias1,(depth0 != null ? depth0.RightMenuSub : depth0),{"name":"createRightLiColumn","hash":{},"data":data}),{"name":"each","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+	    + "			</ul>\n	</div>\n</div>";
 	},"useData":true});
 
 /***/ },
@@ -13944,7 +13961,7 @@
 	    + ((stack1 = container.invokePartial(partials.developmentPartial,depth0,{"name":"developmentPartial","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
 	    + ((stack1 = container.invokePartial(partials.stationManagementPartial,depth0,{"name":"stationManagementPartial","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
 	    + ((stack1 = container.invokePartial(partials.feedsPartial,depth0,{"name":"feedsPartial","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
-	    + "							\n					\n					<li><a href=\"#\" class=\"myPBS-pillMenu-openCloseBtn\"><i class=\"glyphicon glyphicon-chevron-left glyphicon-chevron-right\"></i></a></li>\n\n					</ul>\n\n\n				</nav><!--Menu HTML Code-->\n			</div>\n		</nav>\n	</div><!-- /myPBS-pillMenu-wsmenucontainer -->\n";
+	    + "							\n					\n					<li><a href=\"#\" class=\"myPBS-pillMenu-openCloseBtn\"><i class=\"glyphicon glyphicon-chevron-left glyphicon-chevron-right\"></i></a></li>\n\n					</ul>\n\n\n				</nav>\n			</div>\n		</nav>\n	</div><!-- /myPBS-pillMenu-wsmenucontainer -->\n";
 	},"usePartial":true,"useData":true});
 
 /***/ },
