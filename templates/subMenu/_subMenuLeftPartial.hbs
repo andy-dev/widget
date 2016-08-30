@@ -1,0 +1,9 @@
+{{#each WatchVideos.MenuItem.SubMenu.LeftMenu}}
+	{{#if @first}}
+		<li class="active"><a href='#p-watchvideos-{{Index}}' data-toggle="tab">{{Text}}</a></li>
+	{{else}}
+		<li><a href='#p-watchvideos-{{Index}}' data-toggle="tab">{{Text}}</a></li>
+	{{/if}}
+{{/each}}
+	
+<li><a href="#">Browse All By List</a></li>
