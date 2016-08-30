@@ -48,9 +48,10 @@
 	__webpack_require__(2);
 	__webpack_require__(15);
 	__webpack_require__(16);
-	__webpack_require__(37);
 
-	var getPartials = __webpack_require__(38)
+
+	var getPartials = __webpack_require__(37)
+	var setOpenClosePillHandlers = __webpack_require__(46)
 
 	var PbsPillWidget = (function(){
 		
@@ -90,7 +91,7 @@
 
 		  var appendTo = document.getElementById('pbs-pill-widget'); 
 		  appendTo.parentNode.insertBefore(div, appendTo);
-		  
+		  setOpenClosePillHandlers();
 		}
 	 
 		getPartials();
@@ -13460,98 +13461,16 @@
 /* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function($, jQuery) {$(function(){
-
-	  var myPBS_PILL_MENU = {};
-	  myPBS_PILL_MENU.$ = myPBS_PILL_MENU.jQuery = jQuery.noConflict(true);
-
-	  myPBS_PILL_MENU.open = false;
-
-	   myPBS_PILL_MENU.$('.myPBS-pillMenu-openCloseBtn').click(function(e){
-	    e.preventDefault();
-	    myPBS_PILL_MENU.$('.myPBS-pillMenu-wsmenu').toggleClass('myPBS-pillMenu-collapsedMenu');
-	    myPBS_PILL_MENU.$('.myPBS-pillMenu-wsmenu').addClass('myPBS-pillMenu-hideMenuSections');
-	    myPBS_PILL_MENU.$(this).find('i').toggleClass('glyphicon-chevron-right');
-	    if(myPBS_PILL_MENU.open == false){
-	      myPBS_PILL_MENU.open = true;
-	      setTimeout(myPBSmenuTimer, 500);
-	    } else {
-	      myPBS_PILL_MENU.open = false;
-	    }
-	  });
-
-	  var myPBSmenuTimer = function(){
-	    myPBS_PILL_MENU.$('.myPBS-pillMenu-wsmenu').toggleClass('myPBS-pillMenu-hideMenuSections');
-	  };
-
-	  var items = myPBS_PILL_MENU.$('.myPBS-pillMenu-overlapblackbg, .slideLeft');
-	  var myPBSpillMenuContent = myPBS_PILL_MENU.$('.myPBS-pillMenu-content');
-	  
-	  var menuopen = function() {
-	    myPBS_PILL_MENU.$(items).removeClass('menuclose').addClass('menuopen');
-	  }
-
-	  var menuclose = function() { 
-	    myPBS_PILL_MENU.$(items).removeClass('menuopen').addClass('menuclose');
-	  }
-
-	  myPBS_PILL_MENU.$('#myPBS-pillMenu-navToggle').click(function(){
-	    if (myPBSpillMenuContent.hasClass('menuopen')) {
-	      myPBS_PILL_MENU.$(menuclose)
-	    } else {
-	      myPBS_PILL_MENU.$(menuopen);
-	    }
-	  });
-
-	  myPBSpillMenuContent.click(function(){
-	    if (myPBSpillMenuContent.hasClass('menuopen')) {
-	      myPBS_PILL_MENU.$(menuclose)
-	    }
-	  });
-
-	  myPBS_PILL_MENU.$('#myPBS-pillMenu-navToggle, .myPBS-pillMenu-overlapblackbg').on('click', function(){
-	    myPBS_PILL_MENU.$('.myPBS-pillMenu-container').toggleClass( "mrginleft" );
-	  });
-
-	  myPBS_PILL_MENU.$('.myPBS-pillMenu-wsmenu-list li').has('.myPBS-pillMenu-wsmenu-submenu, .myPBS-pillMenu-wsmenu-submenu-sub, .myPBS-pillMenu-wsmenu-submenu-sub-sub').prepend('<span class="myPBS-pillMenu-wsmenu-click"><i class="myPBS-pillMenu-wsmenu-myPBS-pillMenu-arrow"></i></span>');
-	  myPBS_PILL_MENU.$('.myPBS-pillMenu-wsmenu-list li').has('.megamenu').prepend('<span class="myPBS-pillMenu-wsmenu-click"><i class="myPBS-pillMenu-wsmenu-myPBS-pillMenu-arrow"></i></span>');
-	  myPBS_PILL_MENU.$('.myPBS-pillMenu-wsmenu-mobile').click(function(){
-	    myPBS_PILL_MENU.$('.myPBS-pillMenu-wsmenu-list').slideToggle('slow');
-	  });
-
-	  // Added by PBS
-	  myPBS_PILL_MENU.$('.myPBS-pillMenu-wsmenu-click').click(function(e){
-	    e.stopPropagation();
-	    myPBS_PILL_MENU.$('.myPBS-pillMenu-wsmenu-click').parent().not(myPBS_PILL_MENU.$(this).parent()).removeClass('open');
-	    myPBS_PILL_MENU.$(this).parent().toggleClass('open');
-	  });
-
-
-	});
-
-
-
-
-	 
-	 
-
-
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(1)))
-
-/***/ },
-/* 38 */
-/***/ function(module, exports, __webpack_require__) {
-
 	module.exports = function(){
 		var Handlebars = __webpack_require__(17);
-		var watchVideosPartial = __webpack_require__(39),
-		 		programmingPartial = __webpack_require__(40),
-				engagePromotePartial = __webpack_require__(41),
-				developmentPartial  = __webpack_require__(42),
-				stationManagementPartial  = __webpack_require__(43),
-				feedsPartial = __webpack_require__(44),
-				subMenuRightFirstPartial  = __webpack_require__(45)
-				subMenuRightRemainingPartials = __webpack_require__(46);
+		var watchVideosPartial = __webpack_require__(38),
+		 		programmingPartial = __webpack_require__(39),
+				engagePromotePartial = __webpack_require__(40),
+				developmentPartial  = __webpack_require__(41),
+				stationManagementPartial  = __webpack_require__(42),
+				feedsPartial = __webpack_require__(43),
+				subMenuRightFirstPartial  = __webpack_require__(44)
+				subMenuRightRemainingPartials = __webpack_require__(45);
 
 		Handlebars.registerPartial({
 			watchVideosPartial            :watchVideosPartial,
@@ -13567,7 +13486,7 @@
 
 
 /***/ },
-/* 39 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Handlebars = __webpack_require__(18);
@@ -13620,7 +13539,7 @@
 	},"usePartial":true,"useData":true});
 
 /***/ },
-/* 40 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Handlebars = __webpack_require__(18);
@@ -13673,7 +13592,7 @@
 	},"usePartial":true,"useData":true});
 
 /***/ },
-/* 41 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Handlebars = __webpack_require__(18);
@@ -13726,7 +13645,7 @@
 	},"usePartial":true,"useData":true});
 
 /***/ },
-/* 42 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Handlebars = __webpack_require__(18);
@@ -13779,7 +13698,7 @@
 	},"usePartial":true,"useData":true});
 
 /***/ },
-/* 43 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Handlebars = __webpack_require__(18);
@@ -13832,7 +13751,7 @@
 	},"usePartial":true,"useData":true});
 
 /***/ },
-/* 44 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Handlebars = __webpack_require__(18);
@@ -13885,7 +13804,7 @@
 	},"usePartial":true,"useData":true});
 
 /***/ },
-/* 45 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Handlebars = __webpack_require__(18);
@@ -13926,7 +13845,7 @@
 	},"useData":true});
 
 /***/ },
-/* 46 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Handlebars = __webpack_require__(18);
@@ -13945,6 +13864,91 @@
 	    + ((stack1 = (helpers.listItem || (depth0 && depth0.listItem) || alias2).call(alias1,4,8,(depth0 != null ? depth0.RightMenuSub : depth0),{"name":"listItem","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
 	    + "		</ul>\n	</div>\n</div>";
 	},"useData":true});
+
+/***/ },
+/* 46 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(jQuery) {module.exports = function(){
+	  var myPBS_PILL_MENU = {};
+	  myPBS_PILL_MENU.$ = myPBS_PILL_MENU.jQuery = jQuery.noConflict(true);
+	  
+	  myPBS_PILL_MENU.$(function(){
+
+	    var myPBS_PILL_MENU = {};
+	    myPBS_PILL_MENU.$ = myPBS_PILL_MENU.jQuery = jQuery.noConflict(true);
+
+	    myPBS_PILL_MENU.open = false;
+
+	     myPBS_PILL_MENU.$('.myPBS-pillMenu-openCloseBtn').click(function(e){
+	      e.preventDefault();
+	      myPBS_PILL_MENU.$('.myPBS-pillMenu-wsmenu').toggleClass('myPBS-pillMenu-collapsedMenu');
+	      myPBS_PILL_MENU.$('.myPBS-pillMenu-wsmenu').addClass('myPBS-pillMenu-hideMenuSections');
+	      myPBS_PILL_MENU.$(this).find('i').toggleClass('glyphicon-chevron-right');
+	      if(myPBS_PILL_MENU.open == false){
+	        myPBS_PILL_MENU.open = true;
+	        setTimeout(myPBSmenuTimer, 500);
+	      } else {
+	        myPBS_PILL_MENU.open = false;
+	      }
+	    });
+
+	    var myPBSmenuTimer = function(){
+	      myPBS_PILL_MENU.$('.myPBS-pillMenu-wsmenu').toggleClass('myPBS-pillMenu-hideMenuSections');
+	    };
+
+	    var items = myPBS_PILL_MENU.$('.myPBS-pillMenu-overlapblackbg, .slideLeft');
+	    var myPBSpillMenuContent = myPBS_PILL_MENU.$('.myPBS-pillMenu-content');
+	    
+	    var menuopen = function() {
+	      myPBS_PILL_MENU.$(items).removeClass('menuclose').addClass('menuopen');
+	    }
+
+	    var menuclose = function() { 
+	      myPBS_PILL_MENU.$(items).removeClass('menuopen').addClass('menuclose');
+	    }
+
+	    myPBS_PILL_MENU.$('#myPBS-pillMenu-navToggle').click(function(){
+	      if (myPBSpillMenuContent.hasClass('menuopen')) {
+	        myPBS_PILL_MENU.$(menuclose)
+	      } else {
+	        myPBS_PILL_MENU.$(menuopen);
+	      }
+	    });
+
+	    myPBSpillMenuContent.click(function(){
+	      if (myPBSpillMenuContent.hasClass('menuopen')) {
+	        myPBS_PILL_MENU.$(menuclose)
+	      }
+	    });
+
+	    myPBS_PILL_MENU.$('#myPBS-pillMenu-navToggle, .myPBS-pillMenu-overlapblackbg').on('click', function(){
+	      myPBS_PILL_MENU.$('.myPBS-pillMenu-container').toggleClass( "mrginleft" );
+	    });
+
+	    myPBS_PILL_MENU.$('.myPBS-pillMenu-wsmenu-list li').has('.myPBS-pillMenu-wsmenu-submenu, .myPBS-pillMenu-wsmenu-submenu-sub, .myPBS-pillMenu-wsmenu-submenu-sub-sub').prepend('<span class="myPBS-pillMenu-wsmenu-click"><i class="myPBS-pillMenu-wsmenu-myPBS-pillMenu-arrow"></i></span>');
+	    myPBS_PILL_MENU.$('.myPBS-pillMenu-wsmenu-list li').has('.megamenu').prepend('<span class="myPBS-pillMenu-wsmenu-click"><i class="myPBS-pillMenu-wsmenu-myPBS-pillMenu-arrow"></i></span>');
+	    myPBS_PILL_MENU.$('.myPBS-pillMenu-wsmenu-mobile').click(function(){
+	      myPBS_PILL_MENU.$('.myPBS-pillMenu-wsmenu-list').slideToggle('slow');
+	    });
+
+	    // Added by PBS
+	    myPBS_PILL_MENU.$('.myPBS-pillMenu-wsmenu-click').click(function(e){
+	      e.stopPropagation();
+	      myPBS_PILL_MENU.$('.myPBS-pillMenu-wsmenu-click').parent().not(myPBS_PILL_MENU.$(this).parent()).removeClass('open');
+	      myPBS_PILL_MENU.$(this).parent().toggleClass('open');
+	    });
+
+	  });
+	}
+
+
+
+	 
+	 
+
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
 /* 47 */

@@ -2,9 +2,10 @@
 require("../styles/menuV2.css");
 require("./bootstrap.js");
 require("./handleBarsHelpers.js");
-require("./pill.js");
+
 
 var getPartials = require("./handleBarsPartials")
+var setOpenClosePillHandlers = require("./pill.js")
 
 var PbsPillWidget = (function(){
 	
@@ -44,7 +45,7 @@ var PbsPillWidget = (function(){
 
 	  var appendTo = document.getElementById('pbs-pill-widget'); 
 	  appendTo.parentNode.insertBefore(div, appendTo);
-	  
+	  setOpenClosePillHandlers();
 	}
  
 	getPartials();
