@@ -20,6 +20,25 @@ Handlebars.registerHelper('generatePages', function(rightMenu){
 	}
 })
 
+Handlebars.registerHelper('getHtmlElements', function(contentsArray){
+	var parser = new DOMParser;
+	var htmlContents =[];
+	  
+  for (var i = 0; i < contentsArray.length; i++) {   
+    var xmlString    = contentsArray[i].Html;
+    var doc          = parser.parseFromString(xmlString, "text/xml");
+
+    htmlContents.push({
+      Link        : doc.firstChild.childNodes[0].getAttribute("href"),
+      Image       : doc.firstChild.childNodes[0].getElementsByTagName("img")[0].getAttribute("src"),
+      Header      : doc.firstChild.childNodes[0].getElementsByTagName("h4")[0].innerHTML,
+      Description : doc.firstChild.childNodes[0].getElementsByTagName("p")[0].innerHTML
+    })
+  }
+	return htmlContents;
+})
+
+
 Handlebars.registerHelper("incIndex", function(value, options){
 	return parseInt(value) + 1;
 })

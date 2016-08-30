@@ -1,14 +1,13 @@
 // require("./style.css");
 require("../styles/menuV2.css");
-// require("../styles/myPBS-pill-menu.css");
 require("./bootstrap.js");
-// require("./bootstrapTab.js");
 require("./handleBarsHelpers.js");
+require("./pill.js");
 
-
+var getPartials = require("./handleBarsPartials")
 
 var PbsPillWidget = (function(){
-
+	
 	var PbsPillWidget = {};
 	PbsPillWidget.$ = PbsPillWidget.jQuery = jQuery.noConflict(true);
 
@@ -29,27 +28,7 @@ var PbsPillWidget = (function(){
     });
 	}
 
-	function getHandleBarsPartials(){
-		var Handlebars = require('handlebars-template-loader/runtime');
-		var watchVideosPartial       = require('../templates/_watchVideosPartial.hbs'),
-		 		programmingPartial       = require('../templates/_programmingPartial.hbs'),
-				engagePromotePartial     = require('../templates/_engagePromotePartial.hbs'),
-				developmentPartial       = require('../templates/_developmentPartial.hbs'),
-				stationManagementPartial = require('../templates/_stationManagementPartial.hbs'),
-				feedsPartial             = require('../templates/_feedsPartial.hbs');
-
-		Handlebars.registerPartial({
-			watchVideosPartial         :watchVideosPartial,
-			programmingPartial         :programmingPartial,
-			engagePromotePartial       :engagePromotePartial,
-			developmentPartial         :developmentPartial,
-			stationManagementPartial   :stationManagementPartial,
-			feedsPartial               :feedsPartial
-		});
-	}
-
 	function renderPbsPill(serverResponse){
-	  
 	  var template = require('../templates/mainTemplate.hbs');
 	  var menuServerResponseMock = require('../response.json');
 	
@@ -65,31 +44,14 @@ var PbsPillWidget = (function(){
 
 	  var appendTo = document.getElementById('pbs-pill-widget'); 
 	  appendTo.parentNode.insertBefore(div, appendTo);
-	  require("./pill.js");
-	}
-
-	function renderBrandonPill(serverResponse){
 	  
-	  var template = require('../templates/test.hbs');
-	  
-	
-	  var div = document.createElement('div');
-	  div.innerHTML = template();
-
-	  var appendTo = document.getElementById('pbs-pill-widget'); 
-	  appendTo.parentNode.insertBefore(div, appendTo);
-	  require("./pill.js");
 	}
-
-
-	
-	getHandleBarsPartials();
+ 
+	getPartials();
 	renderPbsPill();
 	// getPillData();
-
 	// renderBrandonPill();
 	
-	return {};
 })();
 
 

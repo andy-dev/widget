@@ -1,4 +1,4 @@
-var pillJsAnimation = (function(){
+$(function(){
 
   var myPBS_PILL_MENU = {};
   myPBS_PILL_MENU.$ = myPBS_PILL_MENU.jQuery = jQuery.noConflict(true);
@@ -65,7 +65,7 @@ var pillJsAnimation = (function(){
   });
 
 
-})();
+});
 
 
 
