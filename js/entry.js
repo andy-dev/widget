@@ -1,13 +1,13 @@
 require("../styles/myPBS-pill-menu.css");
-require("./bootstrap.js");
+require("./bootstrapTab.js");
 require("./handleBarsHelpers.js");
 
-var getPartials = require("./handleBarsPartials")
-var setOpenClosePillHandlers = require("./pill.js")
 
-var PbsPillWidget = (function(){
+(function PbsPillWidget(){
 	
 	var PbsPillWidget = {};
+	var getPartials = require("./handleBarsPartials")
+	var setOpenClosePillHandlers = require("./pill.js")
 	PbsPillWidget.$ = PbsPillWidget.jQuery = jQuery.noConflict(true);
 
 	function getPillData(){
