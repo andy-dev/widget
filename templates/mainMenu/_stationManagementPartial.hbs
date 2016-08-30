@@ -1,5 +1,7 @@
 <li class="myPBS-pillMenu-menuSection">
-	<a class="myPBS-pillMenu-wsmenu-click" href="#"><i class="menu-icon myPBS-pillMenu-icon-gear"></i>&nbsp;&nbsp;Station Management <span class="myPBS-pillMenu-arrow"></span></a>
+	<a class="myPBS-pillMenu-wsmenu-click" href="#">
+		<i class="menu-icon myPBS-pillMenu-icon-gear"></i>&nbsp;&nbsp;Station Management <span class="myPBS-pillMenu-arrow"></span>
+	</a>
 	
 	<div class="myPBS-pillMenu-megamenu clearfix">
 	  <ul class="nav nav-tabs tabs-left col-lg-3">
@@ -19,11 +21,11 @@
     	{{#each StationManagement.MenuItem.SubMenu.RightMenu}}
 				{{#if @first}}
 					<div class="tab-pane active fade in" id="p-stationmanagement-1">
-						{{> subMenuRightFirstPartial}}
+						{{> subMenuRightPartial}}
 					</div>
 				{{else}}
 					<div class="tab-pane fade in" id='p-stationmanagement-{{math @index "+" 1}}'>
-						{{> subMenuRightRemainingPartials}}
+						{{> subMenuRightPartial}}
 					</div>	
       	{{/if}}
     	{{/each}}

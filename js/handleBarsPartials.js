@@ -6,17 +6,15 @@ module.exports = function(){
 			developmentPartial  = require('../templates/mainMenu/_developmentPartial.hbs'),
 			stationManagementPartial  = require('../templates/mainMenu/_stationManagementPartial.hbs'),
 			feedsPartial = require('../templates/mainMenu/_feedsPartial.hbs'),
-			subMenuRightFirstPartial  = require('../templates/subMenu/_subMenuRightFirstPartial.hbs')
-			subMenuRightRemainingPartials = require('../templates/subMenu/_subMenuRightRemainingPartials.hbs');
+			subMenuRightPartial  = require('../templates/subMenu/_subMenuRightPartial.hbs')
 
 	Handlebars.registerPartial({
-		watchVideosPartial            :watchVideosPartial,
-		programmingPartial            :programmingPartial,
-		engagePromotePartial          :engagePromotePartial,
-		developmentPartial            :developmentPartial,
-		stationManagementPartial      :stationManagementPartial,
-		feedsPartial                  :feedsPartial,
-		subMenuRightFirstPartial      :subMenuRightFirstPartial,
-		subMenuRightRemainingPartials :subMenuRightRemainingPartials 
+		watchVideosPartial       :watchVideosPartial,
+		programmingPartial       :programmingPartial,
+		engagePromotePartial     :engagePromotePartial,
+		developmentPartial       :developmentPartial,
+		stationManagementPartial :stationManagementPartial,
+		feedsPartial             :feedsPartial,
+		subMenuRightPartial      :subMenuRightPartial 
 	});
 }

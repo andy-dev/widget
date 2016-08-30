@@ -1,5 +1,7 @@
 <li class="myPBS-pillMenu-menuSection">
-	<a class="myPBS-pillMenu-wsmenu-click" href="#"><i class="menu-icon myPBS-pillMenu-icon-film-strip"></i>&nbsp;&nbsp;Programming <span class="myPBS-pillMenu-arrow"></span></a>
+	<a class="myPBS-pillMenu-wsmenu-click" href="#">
+		<i class="menu-icon myPBS-pillMenu-icon-film-strip"></i>&nbsp;&nbsp;Programming <span class="myPBS-pillMenu-arrow"></span>
+	</a>
 
 	<div class="myPBS-pillMenu-megamenu clearfix">		    
 		<ul class="nav nav-tabs tabs-left col-lg-3">
@@ -16,14 +18,14 @@
 		</ul>
 		
 		<div class="tab-content col-lg-8">
-	    {{#each Programming.MenuItem.SubMenu.RightMenu}}
+    	{{#each Programming.MenuItem.SubMenu.RightMenu}}
 				{{#if @first}}
 					<div class="tab-pane active fade in" id="p-programming-1">
-						{{> subMenuRightFirstPartial}}
+						{{> subMenuRightPartial}}
 					</div>
 				{{else}}
 					<div class="tab-pane fade in" id='p-programming-{{math @index "+" 1}}'>
-						{{> subMenuRightRemainingPartials}}
+						{{> subMenuRightPartial}}
 					</div>	
       	{{/if}}
     	{{/each}}

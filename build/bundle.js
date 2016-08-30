@@ -49,7 +49,7 @@
 	__webpack_require__(16);
 
 	var getPartials = __webpack_require__(37)
-	var setOpenClosePillHandlers = __webpack_require__(46)
+	var setOpenClosePillHandlers = __webpack_require__(44)
 
 	var PbsPillWidget = (function(){
 		
@@ -74,8 +74,8 @@
 		}
 
 		function renderPbsPill(serverResponse){
-		  var template = __webpack_require__(47);
-		  var menuServerResponseMock = __webpack_require__(49);
+		  var template = __webpack_require__(45);
+		  var menuServerResponseMock = __webpack_require__(47);
 		
 		  var div = document.createElement('div');
 		  div.innerHTML = template({
@@ -103,54 +103,6 @@
 
 
 
-
-
-	// function getImages(){
-	// 	var img = document.createElement('img');
-	// 	img.style.height = "25%";
-	// 	img.style.width = "25%";
-	// 	img.src = require('./images/pbs_menu_icons/DashboardWatch.png');
-	// 	document.getElementById('img_container').appendChild(img);
-	// }
-
-
-
-
-
-
-	//get json response object
-	// var results = require("./menuParser.js");
-
-	// console.log(results);
-		
-
-	// function loadScript(url, cb){
-	// 	var script = document.createElement('script');
-
-	// 	script.async = true;
-	// 	script.src=url;
-
-	// 	var entry = document.getElementsByTagName('script')[0];
-	// 	entry.parentNode.insertBefore(script, entry);
-
-	// 	script.onload = script.onreadystatechange = function(){
-	// 		var rdyState = script.readyState;
-
-	// 		if(!rdyState || /complete|loaded/.test(script.readyState)){
-	// 			cb();
-
-
-				//after cb we detach event handlers to avoid memory leaks
-	// 			script.onload = null;
-	// 			script.onreadystatechange = null;
-	// 		}
-	// 	};
-	// }
-
-
-	//how it works now
-
-	// require("./menus.css");
 
 
 
@@ -12135,7 +12087,7 @@
 
 	var Handlebars = __webpack_require__(17);
 
-	Handlebars.registerHelper('listItem', function(from, to, context,options){
+	Handlebars.registerHelper('listItem', function(from, to, context, options){
 		var item = "";
 		for(var i = from, j=to; i < j; i++){
 			item += options.fn(context[i]);
@@ -12167,21 +12119,27 @@
 	  return results; 
 	})
 
-	Handlebars.registerHelper('getHtmlElements', function(contentsArray){
+	Handlebars.registerHelper('getHtmlElements', function(contentsArray, contentsVisibleFlag){
 		var parser = new DOMParser;
 		var htmlContents =[];
-		  
-	  for (var i = 0; i < contentsArray.length; i++) {   
-	    var xmlString    = contentsArray[i].Html;
-	    var doc          = parser.parseFromString(xmlString, "text/xml");
+		
+		if(contentsArray.length > 0 && contentsVisibleFlag != false){
+		
+		  for (var i = 0; i < contentsArray.length; i++) {   
+		    var xmlString    = contentsArray[i].Html;
 
-	    htmlContents.push({
-	      Link        : doc.firstChild.childNodes[0].getAttribute("href"),
-	      Image       : doc.firstChild.childNodes[0].getElementsByTagName("img")[0].getAttribute("src"),
-	      Header      : doc.firstChild.childNodes[0].getElementsByTagName("h4")[0].innerHTML,
-	      Description : doc.firstChild.childNodes[0].getElementsByTagName("p")[0].innerHTML
-	    })
-	  }
+		  	if (xmlString != ""){
+		    	var doc          = parser.parseFromString(xmlString, "text/xml");
+		    	htmlContents.push({
+			      Link        : doc.firstChild.childNodes[0].getAttribute("href"),
+			      Image       : doc.firstChild.childNodes[0].getElementsByTagName("img")[0].getAttribute("src"),
+			      Header      : doc.firstChild.childNodes[0].getElementsByTagName("h4")[0].innerHTML,
+			      Description : doc.firstChild.childNodes[0].getElementsByTagName("p")[0].innerHTML
+			    })
+		  	}
+		  }	
+		}
+		  
 		return htmlContents;
 	})
 
@@ -13395,18 +13353,16 @@
 				developmentPartial  = __webpack_require__(41),
 				stationManagementPartial  = __webpack_require__(42),
 				feedsPartial = __webpack_require__(43),
-				subMenuRightFirstPartial  = __webpack_require__(44)
-				subMenuRightRemainingPartials = __webpack_require__(45);
+				subMenuRightPartial  = __webpack_require__(48)
 
 		Handlebars.registerPartial({
-			watchVideosPartial            :watchVideosPartial,
-			programmingPartial            :programmingPartial,
-			engagePromotePartial          :engagePromotePartial,
-			developmentPartial            :developmentPartial,
-			stationManagementPartial      :stationManagementPartial,
-			feedsPartial                  :feedsPartial,
-			subMenuRightFirstPartial      :subMenuRightFirstPartial,
-			subMenuRightRemainingPartials :subMenuRightRemainingPartials 
+			watchVideosPartial       :watchVideosPartial,
+			programmingPartial       :programmingPartial,
+			engagePromotePartial     :engagePromotePartial,
+			developmentPartial       :developmentPartial,
+			stationManagementPartial :stationManagementPartial,
+			feedsPartial             :feedsPartial,
+			subMenuRightPartial      :subMenuRightPartial 
 		});
 	}
 
@@ -13444,7 +13400,7 @@
 	    var stack1;
 
 	  return "					<div class=\"tab-pane active fade in\" id=\"p-watchvideos-1\">\n"
-	    + ((stack1 = container.invokePartial(partials.subMenuRightFirstPartial,depth0,{"name":"subMenuRightFirstPartial","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
+	    + ((stack1 = container.invokePartial(partials.subMenuRightPartial,depth0,{"name":"subMenuRightPartial","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
 	    + "					</div>\n";
 	},"9":function(container,depth0,helpers,partials,data) {
 	    var stack1;
@@ -13452,12 +13408,12 @@
 	  return "					<div class=\"tab-pane fade in\" id='p-watchvideos-"
 	    + container.escapeExpression((helpers.math || (depth0 && depth0.math) || helpers.helperMissing).call(depth0 != null ? depth0 : {},(data && data.index),"+",1,{"name":"math","hash":{},"data":data}))
 	    + "'>\n"
-	    + ((stack1 = container.invokePartial(partials.subMenuRightRemaningPartials,depth0,{"name":"subMenuRightRemaningPartials","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
+	    + ((stack1 = container.invokePartial(partials.subMenuRightPartial,depth0,{"name":"subMenuRightPartial","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
 	    + "					</div>	\n";
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1, alias1=depth0 != null ? depth0 : {};
 
-	  return "<li class=\"myPBS-pillMenu-menuSection\">\n	<a class=\"myPBS-pillMenu-wsmenu-click\" href=\"#\"><i class=\"menu-icon myPBS-pillMenu-icon-tv\"></i>&nbsp;&nbsp;Watch Videos <span class=\"myPBS-pillMenu-arrow\"></span></a>\n\n	<div class=\"myPBS-pillMenu-megamenu clearfix\">    \n		<ul class=\"nav nav-tabs tabs-left col-lg-3\">\n		   \n"
+	  return "<li class=\"myPBS-pillMenu-menuSection\">\n	<a class=\"myPBS-pillMenu-wsmenu-click\" href=\"#\">\n		<i class=\"menu-icon myPBS-pillMenu-icon-tv\"></i>&nbsp;&nbsp;Watch Videos <span class=\"myPBS-pillMenu-arrow\"></span>\n	</a>\n\n	<div class=\"myPBS-pillMenu-megamenu clearfix\">    \n		<ul class=\"nav nav-tabs tabs-left col-lg-3\">\n		   \n"
 	    + ((stack1 = helpers.each.call(alias1,((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.WatchVideos : depth0)) != null ? stack1.MenuItem : stack1)) != null ? stack1.SubMenu : stack1)) != null ? stack1.LeftMenu : stack1),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
 	    + "	\n			<li><a href=\"#\">Browse All By List</a></li>\n		</ul>\n		\n		<div class=\"tab-content col-lg-8\">\n"
 	    + ((stack1 = helpers.each.call(alias1,((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.WatchVideos : depth0)) != null ? stack1.MenuItem : stack1)) != null ? stack1.SubMenu : stack1)) != null ? stack1.RightMenu : stack1),{"name":"each","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
@@ -13497,7 +13453,7 @@
 	    var stack1;
 
 	  return "					<div class=\"tab-pane active fade in\" id=\"p-programming-1\">\n"
-	    + ((stack1 = container.invokePartial(partials.subMenuRightFirstPartial,depth0,{"name":"subMenuRightFirstPartial","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
+	    + ((stack1 = container.invokePartial(partials.subMenuRightPartial,depth0,{"name":"subMenuRightPartial","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
 	    + "					</div>\n";
 	},"9":function(container,depth0,helpers,partials,data) {
 	    var stack1;
@@ -13505,12 +13461,12 @@
 	  return "					<div class=\"tab-pane fade in\" id='p-programming-"
 	    + container.escapeExpression((helpers.math || (depth0 && depth0.math) || helpers.helperMissing).call(depth0 != null ? depth0 : {},(data && data.index),"+",1,{"name":"math","hash":{},"data":data}))
 	    + "'>\n"
-	    + ((stack1 = container.invokePartial(partials.subMenuRightRemainingPartials,depth0,{"name":"subMenuRightRemainingPartials","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
+	    + ((stack1 = container.invokePartial(partials.subMenuRightPartial,depth0,{"name":"subMenuRightPartial","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
 	    + "					</div>	\n";
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1, alias1=depth0 != null ? depth0 : {};
 
-	  return "<li class=\"myPBS-pillMenu-menuSection\">\n	<a class=\"myPBS-pillMenu-wsmenu-click\" href=\"#\"><i class=\"menu-icon myPBS-pillMenu-icon-film-strip\"></i>&nbsp;&nbsp;Programming <span class=\"myPBS-pillMenu-arrow\"></span></a>\n\n	<div class=\"myPBS-pillMenu-megamenu clearfix\">		    \n		<ul class=\"nav nav-tabs tabs-left col-lg-3\">\n		   \n"
+	  return "<li class=\"myPBS-pillMenu-menuSection\">\n	<a class=\"myPBS-pillMenu-wsmenu-click\" href=\"#\">\n		<i class=\"menu-icon myPBS-pillMenu-icon-film-strip\"></i>&nbsp;&nbsp;Programming <span class=\"myPBS-pillMenu-arrow\"></span>\n	</a>\n\n	<div class=\"myPBS-pillMenu-megamenu clearfix\">		    \n		<ul class=\"nav nav-tabs tabs-left col-lg-3\">\n		   \n"
 	    + ((stack1 = helpers.each.call(alias1,((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.Programming : depth0)) != null ? stack1.MenuItem : stack1)) != null ? stack1.SubMenu : stack1)) != null ? stack1.LeftMenu : stack1),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
 	    + "	\n			<li><a href=\"#\">Browse All By List</a></li>\n		</ul>\n		\n		<div class=\"tab-content col-lg-8\">\n"
 	    + ((stack1 = helpers.each.call(alias1,((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.Programming : depth0)) != null ? stack1.MenuItem : stack1)) != null ? stack1.SubMenu : stack1)) != null ? stack1.RightMenu : stack1),{"name":"each","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
@@ -13550,7 +13506,7 @@
 	    var stack1;
 
 	  return "					<div class=\"tab-pane active fade in\" id=\"p-engagepromote-1\">\n"
-	    + ((stack1 = container.invokePartial(partials.subMenuRightFirstPartial,depth0,{"name":"subMenuRightFirstPartial","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
+	    + ((stack1 = container.invokePartial(partials.subMenuRightPartial,depth0,{"name":"subMenuRightPartial","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
 	    + "					</div>\n";
 	},"9":function(container,depth0,helpers,partials,data) {
 	    var stack1;
@@ -13558,12 +13514,12 @@
 	  return "					<div class=\"tab-pane fade in\" id='p-engagepromote-"
 	    + container.escapeExpression((helpers.math || (depth0 && depth0.math) || helpers.helperMissing).call(depth0 != null ? depth0 : {},(data && data.index),"+",1,{"name":"math","hash":{},"data":data}))
 	    + "'>\n"
-	    + ((stack1 = container.invokePartial(partials.subMenuRightRemainingPartials,depth0,{"name":"subMenuRightRemainingPartials","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
+	    + ((stack1 = container.invokePartial(partials.subMenuRightPartial,depth0,{"name":"subMenuRightPartial","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
 	    + "					</div>	\n";
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1, alias1=depth0 != null ? depth0 : {};
 
-	  return "<li class=\"myPBS-pillMenu-menuSection\">\n	<a class=\"myPBS-pillMenu-wsmenu-click\" href=\"#\"><i class=\"menu-icon myPBS-pillMenu-icon-engage\"></i>&nbsp;&nbsp;Engange + Promote <span class=\"myPBS-pillMenu-arrow\"></span></a>\n	\n	<div class=\"myPBS-pillMenu-megamenu clearfix\">\n		<ul class=\"nav nav-tabs tabs-left col-lg-3\">\n		   \n"
+	  return "<li class=\"myPBS-pillMenu-menuSection\">\n	<a class=\"myPBS-pillMenu-wsmenu-click\" href=\"#\">\n		<i class=\"menu-icon myPBS-pillMenu-icon-engage\"></i>&nbsp;&nbsp;Engange + Promote <span class=\"myPBS-pillMenu-arrow\"></span>\n	</a>\n	\n	<div class=\"myPBS-pillMenu-megamenu clearfix\">\n		<ul class=\"nav nav-tabs tabs-left col-lg-3\">\n		   \n"
 	    + ((stack1 = helpers.each.call(alias1,((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.EngagePromote : depth0)) != null ? stack1.MenuItem : stack1)) != null ? stack1.SubMenu : stack1)) != null ? stack1.LeftMenu : stack1),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
 	    + "	\n			<li><a href=\"#\">Browse All By List</a></li>\n		</ul>\n		\n		<div class=\"tab-content col-lg-8\">\n"
 	    + ((stack1 = helpers.each.call(alias1,((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.EngagePromote : depth0)) != null ? stack1.MenuItem : stack1)) != null ? stack1.SubMenu : stack1)) != null ? stack1.RightMenu : stack1),{"name":"each","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
@@ -13603,7 +13559,7 @@
 	    var stack1;
 
 	  return "					<div class=\"tab-pane active fade in\" id=\"p-development-1\">\n"
-	    + ((stack1 = container.invokePartial(partials.subMenuRightFirstPartial,depth0,{"name":"subMenuRightFirstPartial","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
+	    + ((stack1 = container.invokePartial(partials.subMenuRightPartial,depth0,{"name":"subMenuRightPartial","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
 	    + "				 </div>\n";
 	},"9":function(container,depth0,helpers,partials,data) {
 	    var stack1;
@@ -13611,12 +13567,12 @@
 	  return "					<div class=\"tab-pane fade in\" id='p-development-"
 	    + container.escapeExpression((helpers.math || (depth0 && depth0.math) || helpers.helperMissing).call(depth0 != null ? depth0 : {},(data && data.index),"+",1,{"name":"math","hash":{},"data":data}))
 	    + "'>\n"
-	    + ((stack1 = container.invokePartial(partials.subMenuRightRemainingPartials,depth0,{"name":"subMenuRightRemainingPartials","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
+	    + ((stack1 = container.invokePartial(partials.subMenuRightPartial,depth0,{"name":"subMenuRightPartial","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
 	    + "					</div>	\n";
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1, alias1=depth0 != null ? depth0 : {};
 
-	  return "<li class=\"myPBS-pillMenu-menuSection\">\n	<a class=\"myPBS-pillMenu-wsmenu-click\" href=\"#\"><i class=\"menu-icon myPBS-pillMenu-icon-line-chart\"></i>&nbsp;&nbsp;Development <span class=\"myPBS-pillMenu-arrow\"></span></a>\n\n	<div class=\"myPBS-pillMenu-megamenu clearfix\"> \n		<ul class=\"nav nav-tabs tabs-left col-lg-3\">\n		   \n"
+	  return "<li class=\"myPBS-pillMenu-menuSection\">\n	<a class=\"myPBS-pillMenu-wsmenu-click\" href=\"#\">\n		<i class=\"menu-icon myPBS-pillMenu-icon-line-chart\"></i>&nbsp;&nbsp;Development<span class=\"myPBS-pillMenu-arrow\"></span>\n	</a>\n\n	<div class=\"myPBS-pillMenu-megamenu clearfix\"> \n		<ul class=\"nav nav-tabs tabs-left col-lg-3\">\n		   \n"
 	    + ((stack1 = helpers.each.call(alias1,((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.Development : depth0)) != null ? stack1.MenuItem : stack1)) != null ? stack1.SubMenu : stack1)) != null ? stack1.LeftMenu : stack1),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
 	    + "	\n			<li><a href=\"#\">Browse All By List</a></li>\n		</ul>\n		\n		<div class=\"tab-content col-lg-8\">\n"
 	    + ((stack1 = helpers.each.call(alias1,((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.Development : depth0)) != null ? stack1.MenuItem : stack1)) != null ? stack1.SubMenu : stack1)) != null ? stack1.RightMenu : stack1),{"name":"each","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
@@ -13656,7 +13612,7 @@
 	    var stack1;
 
 	  return "					<div class=\"tab-pane active fade in\" id=\"p-stationmanagement-1\">\n"
-	    + ((stack1 = container.invokePartial(partials.subMenuRightFirstPartial,depth0,{"name":"subMenuRightFirstPartial","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
+	    + ((stack1 = container.invokePartial(partials.subMenuRightPartial,depth0,{"name":"subMenuRightPartial","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
 	    + "					</div>\n";
 	},"9":function(container,depth0,helpers,partials,data) {
 	    var stack1;
@@ -13664,12 +13620,12 @@
 	  return "					<div class=\"tab-pane fade in\" id='p-stationmanagement-"
 	    + container.escapeExpression((helpers.math || (depth0 && depth0.math) || helpers.helperMissing).call(depth0 != null ? depth0 : {},(data && data.index),"+",1,{"name":"math","hash":{},"data":data}))
 	    + "'>\n"
-	    + ((stack1 = container.invokePartial(partials.subMenuRightRemainingPartials,depth0,{"name":"subMenuRightRemainingPartials","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
+	    + ((stack1 = container.invokePartial(partials.subMenuRightPartial,depth0,{"name":"subMenuRightPartial","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
 	    + "					</div>	\n";
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1, alias1=depth0 != null ? depth0 : {};
 
-	  return "<li class=\"myPBS-pillMenu-menuSection\">\n	<a class=\"myPBS-pillMenu-wsmenu-click\" href=\"#\"><i class=\"menu-icon myPBS-pillMenu-icon-gear\"></i>&nbsp;&nbsp;Station Management <span class=\"myPBS-pillMenu-arrow\"></span></a>\n	\n	<div class=\"myPBS-pillMenu-megamenu clearfix\">\n	  <ul class=\"nav nav-tabs tabs-left col-lg-3\">\n		   \n"
+	  return "<li class=\"myPBS-pillMenu-menuSection\">\n	<a class=\"myPBS-pillMenu-wsmenu-click\" href=\"#\">\n		<i class=\"menu-icon myPBS-pillMenu-icon-gear\"></i>&nbsp;&nbsp;Station Management <span class=\"myPBS-pillMenu-arrow\"></span>\n	</a>\n	\n	<div class=\"myPBS-pillMenu-megamenu clearfix\">\n	  <ul class=\"nav nav-tabs tabs-left col-lg-3\">\n		   \n"
 	    + ((stack1 = helpers.each.call(alias1,((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.StationManagement : depth0)) != null ? stack1.MenuItem : stack1)) != null ? stack1.SubMenu : stack1)) != null ? stack1.LeftMenu : stack1),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
 	    + "	\n			<li><a href=\"#\">Browse All By List</a></li>\n		</ul>\n		\n		<div class=\"tab-content col-lg-8\">\n"
 	    + ((stack1 = helpers.each.call(alias1,((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.StationManagement : depth0)) != null ? stack1.MenuItem : stack1)) != null ? stack1.SubMenu : stack1)) != null ? stack1.RightMenu : stack1),{"name":"each","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
@@ -13709,7 +13665,7 @@
 	    var stack1;
 
 	  return "					<div class=\"tab-pane active fade in\" id=\"p-feeds-1\">\n"
-	    + ((stack1 = container.invokePartial(partials.subMenuRightFirstPartial,depth0,{"name":"subMenuRightFirstPartial","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
+	    + ((stack1 = container.invokePartial(partials.subMenuRightPartial,depth0,{"name":"subMenuRightPartial","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
 	    + "					</div>\n";
 	},"9":function(container,depth0,helpers,partials,data) {
 	    var stack1;
@@ -13717,12 +13673,12 @@
 	  return "					<div class=\"tab-pane fade in\" id='p-feeds-"
 	    + container.escapeExpression((helpers.math || (depth0 && depth0.math) || helpers.helperMissing).call(depth0 != null ? depth0 : {},(data && data.index),"+",1,{"name":"math","hash":{},"data":data}))
 	    + "'>\n"
-	    + ((stack1 = container.invokePartial(partials.subMenuRightRemainingPartials,depth0,{"name":"subMenuRightRemainingPartials","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
+	    + ((stack1 = container.invokePartial(partials.subMenuRightPartial,depth0,{"name":"subMenuRightPartial","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
 	    + "					</div>	\n";
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1, alias1=depth0 != null ? depth0 : {};
 
-	  return "<li class=\"myPBS-pillMenu-menuSection\">\n	<a class=\"myPBS-pillMenu-wsmenu-click\" href=\"#\"><i class=\"menu-icon myPBS-pillMenu-icon-feeds\"></i>&nbsp;&nbsp;Feeds <span class=\"myPBS-pillMenu-arrow\"></span></a>\n	\n	<div class=\"myPBS-pillMenu-megamenu clearfix\">  \n		<ul class=\"nav nav-tabs tabs-left col-lg-3\">\n		   \n"
+	  return "<li class=\"myPBS-pillMenu-menuSection\">\n	<a class=\"myPBS-pillMenu-wsmenu-click\" href=\"#\">\n		<i class=\"menu-icon myPBS-pillMenu-icon-feeds\"></i>&nbsp;&nbsp;Feeds <span class=\"myPBS-pillMenu-arrow\"></span>\n	</a>\n	\n	<div class=\"myPBS-pillMenu-megamenu clearfix\">  \n		<ul class=\"nav nav-tabs tabs-left col-lg-3\">\n		   \n"
 	    + ((stack1 = helpers.each.call(alias1,((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.Feeds : depth0)) != null ? stack1.MenuItem : stack1)) != null ? stack1.SubMenu : stack1)) != null ? stack1.LeftMenu : stack1),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
 	    + "	\n			<li><a href=\"#\">Browse All By List</a></li>\n		</ul>\n		\n		<div class=\"tab-content col-lg-8\">\n"
 	    + ((stack1 = helpers.each.call(alias1,((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.Feeds : depth0)) != null ? stack1.MenuItem : stack1)) != null ? stack1.SubMenu : stack1)) != null ? stack1.RightMenu : stack1),{"name":"each","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
@@ -13731,68 +13687,6 @@
 
 /***/ },
 /* 44 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var Handlebars = __webpack_require__(18);
-	module.exports = (Handlebars['default'] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
-	    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
-
-	  return "		<div class=\"col-lg-4 col-md-4 col-xs-12\">\n			<a href=\""
-	    + alias4(((helper = (helper = helpers.Link || (depth0 != null ? depth0.Link : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"Link","hash":{},"data":data}) : helper)))
-	    + "\"><img src=\"http://mypbs.org/"
-	    + alias4(((helper = (helper = helpers.Image || (depth0 != null ? depth0.Image : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"Image","hash":{},"data":data}) : helper)))
-	    + "\" alt=\"This is Product Name\"></a>\n			<h4>"
-	    + alias4(((helper = (helper = helpers.Header || (depth0 != null ? depth0.Header : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"Header","hash":{},"data":data}) : helper)))
-	    + "</h4>\n			<small>"
-	    + alias4(((helper = (helper = helpers.Description || (depth0 != null ? depth0.Description : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"Description","hash":{},"data":data}) : helper)))
-	    + "</small>\n		</div>\n";
-	},"3":function(container,depth0,helpers,partials,data) {
-	    var helper;
-
-	  return "					<li><a href='#'>"
-	    + container.escapeExpression(((helper = (helper = helpers.leftLiItem || (depth0 != null ? depth0.leftLiItem : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"leftLiItem","hash":{},"data":data}) : helper)))
-	    + "</a></li>\n";
-	},"5":function(container,depth0,helpers,partials,data) {
-	    var helper;
-
-	  return "					<li><a href='#'>"
-	    + container.escapeExpression(((helper = (helper = helpers.rightLiItem || (depth0 != null ? depth0.rightLiItem : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"rightLiItem","hash":{},"data":data}) : helper)))
-	    + "</a></li>\n";
-	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-	    var stack1, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing;
-
-	  return "<div class=\"row\">\n"
-	    + ((stack1 = helpers.each.call(alias1,(helpers.getHtmlElements || (depth0 && depth0.getHtmlElements) || alias2).call(alias1,(depth0 != null ? depth0.Contents : depth0),{"name":"getHtmlElements","hash":{},"data":data}),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-	    + "</div>\n<div class=\"row\">\n	<div class=\"col-lg-12 col-md-12 col-xs-12\">\n		<h3>Watch Videos</h3>\n\n			<ul class=\"col-lg-4 col-md-4 col-xs-12 link-list\">											\n"
-	    + ((stack1 = helpers.each.call(alias1,(helpers.createLeftLiColumn || (depth0 && depth0.createLeftLiColumn) || alias2).call(alias1,(depth0 != null ? depth0.RightMenuSub : depth0),{"name":"createLeftLiColumn","hash":{},"data":data}),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-	    + "			</ul>\n			<ul class=\"col-lg-4 col-md-4 col-xs-12 link-list\">	\n"
-	    + ((stack1 = helpers.each.call(alias1,(helpers.createRightLiColumn || (depth0 && depth0.createRightLiColumn) || alias2).call(alias1,(depth0 != null ? depth0.RightMenuSub : depth0),{"name":"createRightLiColumn","hash":{},"data":data}),{"name":"each","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-	    + "			</ul>\n	</div>\n</div>";
-	},"useData":true});
-
-/***/ },
-/* 45 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var Handlebars = __webpack_require__(18);
-	module.exports = (Handlebars['default'] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
-	    var helper;
-
-	  return "				<li><a href='#'>"
-	    + container.escapeExpression(((helper = (helper = helpers.Text || (depth0 != null ? depth0.Text : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"Text","hash":{},"data":data}) : helper)))
-	    + "</a></li>\n";
-	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-	    var stack1, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing;
-
-	  return "<div class=\"row\">\n	<div class=\"col-lg-4 col-md-4 col-xs-12\">\n		<a href=\"#\"><img src=\"http://mypbs.org/uploadedImages/e/Menu_Pop-Outs/dailyexplorer.png\" alt=\"This is Product Name\"></a>\n		<h4>Title of Section</h4>\n		<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n		tempor incididunt ut labore et dolore magna aliqua.</small>\n	</div>\n</div>\n\n<div class=\"row\">\n	<div class=\"col-lg-12 col-md-12 col-xs-12\">\n		<h3>Title of Tab</h3>\n		<ul class=\"col-lg-4 col-md-4 col-xs-12 link-list\">\n"
-	    + ((stack1 = (helpers.listItem || (depth0 && depth0.listItem) || alias2).call(alias1,0,4,(depth0 != null ? depth0.RightMenuSub : depth0),{"name":"listItem","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-	    + "		</ul>\n		<ul class=\"col-lg-4 col-md-4 col-xs-12 link-list\">\n"
-	    + ((stack1 = (helpers.listItem || (depth0 && depth0.listItem) || alias2).call(alias1,4,8,(depth0 != null ? depth0.RightMenuSub : depth0),{"name":"listItem","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-	    + "		</ul>\n	</div>\n</div>";
-	},"useData":true});
-
-/***/ },
-/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(jQuery) {module.exports = function(){
@@ -13878,31 +13772,31 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 47 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Handlebars = __webpack_require__(18);
 	module.exports = (Handlebars['default'] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1;
 
-	  return " <div class=\"myPBS-pillMenu-bootstrap myPBS-pillMenu-container clearfix\">\n\n    <div class=\"myPBS-pillMenu-content myPBS-pillMenu-overlapblackbg\"></div>\n    \n    <div class=\"myPBS-pillMenu-expanderMain slideRight\">\n      <a id=\"myPBS-pillMenu-navToggle\" class=\"myPBS-pillMenu-animated-myPBS-pillMenu-arrow slideLeft\">\n        <span></span>\n      </a>\n      <a href=\"#\" class=\"myPBS-pillMenu-smalLogo\">\n        <img class=\"myPBS-pillMenu-pbsLogoMobile\" src=\"" + __webpack_require__(48) + "\" alt=\"\" />\n      </a>\n    </div>\n\n\n		<nav class=\"container-fluid\">\n      \n      <div class=\"row\">\n\n        <!--Main Menu HTML Code-->\n        <nav class=\"myPBS-pillMenu-wsmenu myPBS-pillMenu-collapsedMenu myPBS-pillMenu-hideMenuSections slideLeft gry-grdt clearfix\">\n\n          <ul class=\"myPBS-pillMenu-mobile-sub myPBS-pillMenu-wsmenu-list\">\n            <li><a href=\"#\" class=\"active\"><i class=\"myPBS-pillMenu-icon-logo\"></i></a></li>\n						\n"
-	    + ((stack1 = container.invokePartial(partials.watchVideosPartial,depth0,{"name":"watchVideosPartial","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
-	    + ((stack1 = container.invokePartial(partials.programmingPartial,depth0,{"name":"programmingPartial","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
-	    + ((stack1 = container.invokePartial(partials.engagePromotePartial,depth0,{"name":"engagePromotePartial","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
-	    + ((stack1 = container.invokePartial(partials.developmentPartial,depth0,{"name":"developmentPartial","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
-	    + ((stack1 = container.invokePartial(partials.stationManagementPartial,depth0,{"name":"stationManagementPartial","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
-	    + ((stack1 = container.invokePartial(partials.feedsPartial,depth0,{"name":"feedsPartial","data":data,"indent":"\t\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
-	    + "							\n					\n					<li><a href=\"#\" class=\"myPBS-pillMenu-openCloseBtn\"><i class=\"glyphicon glyphicon-chevron-left glyphicon-chevron-right\"></i></a></li>\n\n					</ul>\n\n\n				</nav>\n			</div>\n		</nav>\n	</div><!-- /myPBS-pillMenu-wsmenucontainer -->\n";
+	  return "<div class=\"myPBS-pillMenu-bootstrap myPBS-pillMenu-container clearfix\">\n\n	<div class=\"myPBS-pillMenu-content myPBS-pillMenu-overlapblackbg\"></div>   \n\n  <div class=\"myPBS-pillMenu-expanderMain slideRight\">\n    <a id=\"myPBS-pillMenu-navToggle\" class=\"myPBS-pillMenu-animated-myPBS-pillMenu-arrow slideLeft\">\n      <span></span>\n    </a>\n    <a href=\"#\" class=\"myPBS-pillMenu-smalLogo\">\n      <img class=\"myPBS-pillMenu-pbsLogoMobile\" src=\"" + __webpack_require__(46) + "\" alt=\"\" />\n    </a>\n  </div>\n\n	<nav class=\"container-fluid\">    \n    <div class=\"row\">\n      <nav class=\"myPBS-pillMenu-wsmenu myPBS-pillMenu-collapsedMenu myPBS-pillMenu-hideMenuSections slideLeft gry-grdt clearfix\">\n        <ul class=\"myPBS-pillMenu-mobile-sub myPBS-pillMenu-wsmenu-list\">\n          <li><a href=\"#\" class=\"active\"><i class=\"myPBS-pillMenu-icon-logo\"></i></a></li>\n					\n"
+	    + ((stack1 = container.invokePartial(partials.watchVideosPartial,depth0,{"name":"watchVideosPartial","data":data,"indent":"\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
+	    + ((stack1 = container.invokePartial(partials.programmingPartial,depth0,{"name":"programmingPartial","data":data,"indent":"\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
+	    + ((stack1 = container.invokePartial(partials.engagePromotePartial,depth0,{"name":"engagePromotePartial","data":data,"indent":"\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
+	    + ((stack1 = container.invokePartial(partials.developmentPartial,depth0,{"name":"developmentPartial","data":data,"indent":"\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
+	    + ((stack1 = container.invokePartial(partials.stationManagementPartial,depth0,{"name":"stationManagementPartial","data":data,"indent":"\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
+	    + ((stack1 = container.invokePartial(partials.feedsPartial,depth0,{"name":"feedsPartial","data":data,"indent":"\t\t\t\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
+	    + "						\n					<li><a href=\"#\" class=\"myPBS-pillMenu-openCloseBtn\"><i class=\"glyphicon glyphicon-chevron-left glyphicon-chevron-right\"></i></a></li>\n				</ul>\n			</nav>\n		</div>\n	</nav>\n	\n</div>\n";
 	},"usePartial":true,"useData":true});
 
 /***/ },
-/* 48 */
+/* 46 */
 /***/ function(module, exports) {
 
 	module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAABDCAYAAABX2cG8AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYxIDY0LjE0MDk0OSwgMjAxMC8xMi8wNy0xMDo1NzowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpGOTdGMTE3NDA3MjA2ODExOTEwOUQwMDg1MTVFMEI3NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDowOUFCRUU0RDc1QzYxMUU0QjNENUQ1MzYyMzQzOTBBRiIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowOUFCRUU0Qzc1QzYxMUU0QjNENUQ1MzYyMzQzOTBBRiIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1LjEgTWFjaW50b3NoIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RkQ3RjExNzQwNzIwNjgxMTk3QTVDMjk5MkYxRUNCMkEiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6Rjk3RjExNzQwNzIwNjgxMTkxMDlEMDA4NTE1RTBCNzciLz4gPC9yZGY6RGVzY3Jp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"
 
 /***/ },
-/* 49 */
+/* 47 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -15222,6 +15116,47 @@
 			}
 		]
 	};
+
+/***/ },
+/* 48 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Handlebars = __webpack_require__(18);
+	module.exports = (Handlebars['default'] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
+	    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+	  return "		<div class=\"col-lg-4 col-md-4 col-xs-12\">\n			<a href=\""
+	    + alias4(((helper = (helper = helpers.Link || (depth0 != null ? depth0.Link : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"Link","hash":{},"data":data}) : helper)))
+	    + "\"><img src=\"http://mypbs.org/"
+	    + alias4(((helper = (helper = helpers.Image || (depth0 != null ? depth0.Image : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"Image","hash":{},"data":data}) : helper)))
+	    + "\" alt=\"This is Product Name\"></a>\n			<h4>"
+	    + alias4(((helper = (helper = helpers.Header || (depth0 != null ? depth0.Header : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"Header","hash":{},"data":data}) : helper)))
+	    + "</h4>\n			<small>"
+	    + alias4(((helper = (helper = helpers.Description || (depth0 != null ? depth0.Description : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"Description","hash":{},"data":data}) : helper)))
+	    + "</small>\n		</div>\n";
+	},"3":function(container,depth0,helpers,partials,data) {
+	    var helper;
+
+	  return "					<li><a href='#'>"
+	    + container.escapeExpression(((helper = (helper = helpers.leftLiItem || (depth0 != null ? depth0.leftLiItem : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"leftLiItem","hash":{},"data":data}) : helper)))
+	    + "</a></li>\n";
+	},"5":function(container,depth0,helpers,partials,data) {
+	    var helper;
+
+	  return "					<li><a href='#'>"
+	    + container.escapeExpression(((helper = (helper = helpers.rightLiItem || (depth0 != null ? depth0.rightLiItem : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"rightLiItem","hash":{},"data":data}) : helper)))
+	    + "</a></li>\n";
+	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+	    var stack1, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing;
+
+	  return "<div class=\"row\">\n\n"
+	    + ((stack1 = helpers.each.call(alias1,(helpers.getHtmlElements || (depth0 && depth0.getHtmlElements) || alias2).call(alias1,(depth0 != null ? depth0.Contents : depth0),(depth0 != null ? depth0.ContentsVisible : depth0),{"name":"getHtmlElements","hash":{},"data":data}),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+	    + "\n</div>\n\n<div class=\"row\">\n	<div class=\"col-lg-12 col-md-12 col-xs-12\">\n		<h3>Watch Videos</h3>\n\n			<ul class=\"col-lg-4 col-md-4 col-xs-12 link-list\">											\n"
+	    + ((stack1 = helpers.each.call(alias1,(helpers.createLeftLiColumn || (depth0 && depth0.createLeftLiColumn) || alias2).call(alias1,(depth0 != null ? depth0.RightMenuSub : depth0),{"name":"createLeftLiColumn","hash":{},"data":data}),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+	    + "			</ul>\n			<ul class=\"col-lg-4 col-md-4 col-xs-12 link-list\">	\n"
+	    + ((stack1 = helpers.each.call(alias1,(helpers.createRightLiColumn || (depth0 && depth0.createRightLiColumn) || alias2).call(alias1,(depth0 != null ? depth0.RightMenuSub : depth0),{"name":"createRightLiColumn","hash":{},"data":data}),{"name":"each","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+	    + "			</ul>\n	</div>\n</div>";
+	},"useData":true});
 
 /***/ }
 /******/ ]);

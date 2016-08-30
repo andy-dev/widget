@@ -59,54 +59,6 @@ var PbsPillWidget = (function(){
 
 
 
-// function getImages(){
-// 	var img = document.createElement('img');
-// 	img.style.height = "25%";
-// 	img.style.width = "25%";
-// 	img.src = require('./images/pbs_menu_icons/DashboardWatch.png');
-// 	document.getElementById('img_container').appendChild(img);
-// }
-
-
-
-
-
-
-//get json response object
-// var results = require("./menuParser.js");
-
-// console.log(results);
-	
-
-// function loadScript(url, cb){
-// 	var script = document.createElement('script');
-
-// 	script.async = true;
-// 	script.src=url;
-
-// 	var entry = document.getElementsByTagName('script')[0];
-// 	entry.parentNode.insertBefore(script, entry);
-
-// 	script.onload = script.onreadystatechange = function(){
-// 		var rdyState = script.readyState;
-
-// 		if(!rdyState || /complete|loaded/.test(script.readyState)){
-// 			cb();
-
-
-			//after cb we detach event handlers to avoid memory leaks
-// 			script.onload = null;
-// 			script.onreadystatechange = null;
-// 		}
-// 	};
-// }
-
-
-//how it works now
-
-// require("./menus.css");
-
-
 
 
 
